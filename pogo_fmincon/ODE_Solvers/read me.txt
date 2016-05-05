@@ -1,0 +1,45 @@
+http://www.mathworks.com/matlabcentral/answers/98293-is-there-a-fixed-step-ordinary-differential-equation-ode-solver-in-matlab-8-0-r2012b
+
+
+
+The ability to use a fixed-step solver is not built into MATLAB 8.0 (R2012b).
+
+The ordinary differential equation solver functions provided with MATLAB employ a variety of variable-step methods. 
+ODE23 is based on the Runge Kutta (2,3)integration method, and ODE45 is based on the Runge Kutta (4,5) integration 
+method. ODE113 is a variable-order Adams-Bashforth-Moulton PECE solver. For a complete listing of the various 
+solvers and their methods, see the documentation.
+
+The MATLAB ODE solvers utilize these methods by taking a step, estimating the error at this step, checking to see 
+if the value is greater than or less than the tolerance, and altering the step size accordingly. These integration 
+methods do not lend themselves to a fixed step size. Using an algorithm that uses a fixed step size is dangerous 
+since you can miss points where your signal frequency is greater than the solver frequency. Using a variable step 
+ensures that a large step size is used for low frequencies and a small step size is used for high frequencies. 
+The ODE solvers within MATLAB are optimized for a variable step, run faster with a variable step size, and clearly 
+the results are more accurate.
+
+There are now fixed time step solvers available:
+
+ODE1 - A first-order Euler method
+
+ODE2 - A second-order Euler method
+
+ODE3 - A third-order Runge-Kutta method
+
+ODE4 - A fourth-order Runge-Kutta method
+
+ODE5 - A fifth-order Runge-Kutta method
+
+ODETest
+
+These are included in the attached zip file. After saving the files into a folder located on the MATLAB path, these 
+solvers can be used with the following syntax:
+
+y = ode4(odefun,tspan,y0);
+The integration proceeds by steps, taken to the values specified in tspan. The time values must be in order, either increasing 
+or decreasing. Note that the step size (the distance between consecutive elements of tspan) does not have to be uniform. If 
+the step size is uniform, you might want to use LINSPACE.
+
+For example,
+
+tspan = linspace(t0,tf,nsteps); % t0 = 0; tf = 10, nsteps = 100; 
+Since these files do not ship with MATLAB, these solvers are not officially supported.

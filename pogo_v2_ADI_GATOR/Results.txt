@@ -1,0 +1,100 @@
+A log showing what was changed between each fmincon iteration
+
+00000: local minimum, no GRF constraints
+00001: used 00000 as guess, lift off vel positive con, z-l=0 at the two surfaces constraint, no GRF, local min found
+00002: used 00001 as guess, added vel matching constraint at the switching surfaces, infesible
+00003: used 00001 as guess, chaned vel con at switching surface, prematurely stopped
+00004: used 00003 as guess, converged
+00005: used 00004 as the guess, added another vel con on l, local min found looks good (optimized fully without GRF)
+00006: used 00005 as the guess, added GRF, grf = inv(J*Minv*J.')*(J*Minv*(-CG +pogo.F));converged to infesible point
+00007: used 00005 as the guess, removed the lift off vel positive con, infesible
+00008: used 00005 as the guess, changed tol, local min possible
+00009: used 00008 as the guess, changed the tol back, infesible
+00010: used 00009 as the guess,infesible
+00011: used 00009 as the guess, changed the min length of l, infesible
+00012: used 00009 as the guess, changed the min length of l, local min found that satisfies the constraints
+
+
+
+Trying to repeat 00012 results using the hessian and grad funcs from ADIGATOR:
+00013: used 00009 as the guess, GOT THE SAME RESULTS MUCH FASTER
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OLD RESULTS  %results
+
+00000: used my original guess, stopped prematurely
+00001: used the output of 00000 as the guess, stopped at infesible point
+00002: lmited dq and the force. use 00000 as the guess, loops combined for fligh, stoped prematurely
+00003: same as above, chnged mass 1. infesible point
+
+changed mass back to 10 kg
+00004: used 00002 as the guess, solver stopped prematurely
+00005: used 00004 as the guess, solver stopped prematurely
+00006: used 00005 as the guess, solver stopped prematurely
+
+REMOVED THE LINEAR CONSTRAINTS
+00007: used 00005 as the guess, removed the linear constraints, stopped prematurely
+
+CHANGED THE SPRING CONSTANT, STILL NO LINEAR CON
+00008: used 00007 as the guess, no lin con, weaker spring, solver stopped prematurely
+
+CHANGED THE GRF CALCULATION ((J*Minv*J.')*(J*Minv*(-CG +pogo.F -pogo.k*(q-pogo.lrest)));), added liftoff velocity constraint, changed mass 2=mass 1
+00009: used 00008 as the guess, solver stopped prematurely
+00010: used 00009 as the guess, solver stopped prematurely
+
+CHANGED THE GRF AGAIN (inv(J*Minv*J.')*(-J*Minv*(-CG +pogo.F));), changed the tolerances 
+00011: used 00010 as the guess, infesible
+
+CHANGED THE GRF AGAIN  ((J*Minv*J.')*(-J*Minv*(-CG +pogo.F));), changed the tolerances again
+00012: used 00010 as the guess, stopped prematurely
+
+CHANGED THE APPLIED FORCE FOR THE AERIAL STAGE
+00013: used 00007 as the guess, stopped prematurely
+
+CHANGED THE APPLIED FORCE BACK (0,-F), CHANGED MASS 1 BACK, changed the spring back
+00014: used 00012 as the guess, stopped prematurely
+
+REMOVED THE GRF STUFF
+00015: used 00012 as the guess, worked much better, solver stopped prematurely
+
+REMOVED THE A FOR q+ which i did wrong!!
+00016: used 00015 as the guess, stopped prematurely
+
+CHANGED SPRING CONSTANT FROM 0.5 to 5
+00017: used 00016 as guess, stopped prematurely
+
+removed force for aerial phase
+00018: used 00016 as guess, 
+
+PUT THE FORCE BACK, changed the spring constant again, removed all constraints excet temp1, defects, start, stop
+00019: used 00016 as the guess, solver stopped prematurely
+
+ADDED TWO DEFECT CONSTRAINTS AT THE SWITCHING SURFACE, the constraint was on l
+00020: used 00019 as the guess, stopped prematurely
+00021: used 00020 as the guess, looks good but stopped prematurely
+00022: used 00021 as the guess, looks even better!!!!
+00023: used 00022 as the guess, local min possible

@@ -1,0 +1,1 @@
+A log showing what was changed between each fmincon iteration

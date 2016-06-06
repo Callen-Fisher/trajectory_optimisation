@@ -1,0 +1,10 @@
+function [ F,G ] = userfun(  )
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+    [c,ceq,dc,dceq] = nonlcon(x);
+    z = nF - 1 - size(c,1) - size(ceq,1);
+    F = [ F; c; ceq; zeros(z,1) ];
+    G = [ G; dc; dceq; zeros(z,n) ];
+
+end
+

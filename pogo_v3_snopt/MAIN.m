@@ -11,7 +11,7 @@ addpath('ODE_Solvers');
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%% load the pogo %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load('results/aerial_stance_pogo_00000.mat')
+load('results/aerial_stance_pogo_00000.mat')% load the pogo structure which contains the mass etc
 clear adifuncs EXITFLAG FVAL GRAD Guess HESSIAN LAMBDA MinSoln nNodesF1 nNodesF2 nNodesS OUTPUT Problem time_F1 time_F2 time_S traj traj_sim
 clc
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -22,7 +22,7 @@ nNodesF1=15; % 15 nodes for the first aerial phase
 nNodesS=5; % 5 nodes for the stance phase
 nNodesF2=nNodesF1; % another 15 nodes for the second aerial phase
 tic % start the timer
-[Problem,Guess,x,fval,exitflag,lambda,states]=traj_opt_multipleshoot(nNodesF1,nNodesS,nNodesF2,pogo); % run the multipleshoot setup function
+[Problem,Guess,x,F,inform,xmul,Fmul,xstate,Fstate,output]=traj_opt_multipleshoot(nNodesF1,nNodesS,nNodesF2,pogo); % run the multipleshoot setup function
 toc % end the timer and display how long the optimisation took
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%% RE-RUN THE SIMULATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,7 +44,7 @@ while(exist([path name numText '.mat'],'file')==2)
 end
 filename = [path name numText];
 
-save(filename,'traj','traj_sim','time_F1','time_S','time_F2','nNodesF1','nNodesS','nNodesF2','Guess','pogo','Problem','x','fval','exitflag','lambda','states'); % save all the data
+save(filename,'traj','traj_sim','time_F1','time_S','time_F2','nNodesF1','nNodesS','nNodesF2','Guess','pogo','Problem','x','F','inform','xmul','Fmul','xstate','Fstate','output'); % save all the data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%% ADD TO THE GIT REPOSITORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -20,4 +20,4 @@ for i=1:1:3
     animate(traj_sim,time_sim(end),30,false); % run animation to animate the results
 end
 i=i+1
-animate(traj_sim,time_sim(end),30,true);% save the animation video
+animate(traj_sim,time_sim(end),30,false);% save the animation video

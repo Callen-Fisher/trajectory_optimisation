@@ -79,6 +79,7 @@ for i = 0:1:nNodesF1-1
     %save the results
     traj_F1=[traj_F1;temp];
     final_states_F1(i+1,:) = temp(end,:);
+    %%
     %FLIGHT 2
     u =traj3(5,i+1);
     start_states_F2(i+1,:) = [traj3(1:2,i+1)',traj3(3:4,i+1)'];
